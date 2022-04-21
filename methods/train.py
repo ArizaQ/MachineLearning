@@ -171,7 +171,7 @@ class Trainer(Finetune):
             optimizer.step()
             distill_losses.append(loss_soft_target.item())
             ce_losses.append(loss_hard_target.item())
-        logger.info("stage1 distill loss :"+ np.mean(distill_losses)+ "ce loss :"+ np.mean(ce_losses))
+        logger.info("stage1 distill loss :"+ np.mean(distill_losses)+ "ce loss :"+str( np.mean(ce_losses)))
 
 
     def stage1(self, train_data, criterion, optimizer):
