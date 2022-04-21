@@ -7,227 +7,227 @@
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 0
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:51:59
+[INFO] train.py:108 > 2022-04-21 16:11:55
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 2.727836779185704
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 22.6
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:52:10
+[INFO] train.py:121 > 2022-04-21 16:12:07
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 1
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:52:10
+[INFO] train.py:108 > 2022-04-21 16:12:07
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 2.2835202557700023
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 28.65
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:52:21
+[INFO] train.py:121 > 2022-04-21 16:12:19
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 2
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:52:21
+[INFO] train.py:108 > 2022-04-21 16:12:19
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 2.0910665699413844
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 36.35
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:52:32
+[INFO] train.py:121 > 2022-04-21 16:12:31
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 3
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:52:32
+[INFO] train.py:108 > 2022-04-21 16:12:31
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.898002016544342
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 41.25
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:52:43
+[INFO] train.py:121 > 2022-04-21 16:12:43
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 4
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:52:43
+[INFO] train.py:108 > 2022-04-21 16:12:43
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.7394670588629586
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 46.75
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:52:54
+[INFO] train.py:121 > 2022-04-21 16:12:56
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 5
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:52:54
+[INFO] train.py:108 > 2022-04-21 16:12:56
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.608809539249965
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 46.45
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:53:05
+[INFO] train.py:121 > 2022-04-21 16:13:07
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 6
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:53:05
+[INFO] train.py:108 > 2022-04-21 16:13:07
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.5063525199890138
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 45.35
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:53:17
+[INFO] train.py:121 > 2022-04-21 16:13:19
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 7
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:53:17
+[INFO] train.py:108 > 2022-04-21 16:13:19
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.434395251955305
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 49.95
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:53:28
+[INFO] train.py:121 > 2022-04-21 16:13:31
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 8
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:53:28
+[INFO] train.py:108 > 2022-04-21 16:13:31
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.3473433937345232
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 49.4
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:53:40
+[INFO] train.py:121 > 2022-04-21 16:13:43
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 9
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:53:40
+[INFO] train.py:108 > 2022-04-21 16:13:43
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.2704265543392725
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 48.949999999999996
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:53:51
+[INFO] train.py:121 > 2022-04-21 16:13:56
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 10
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:53:51
+[INFO] train.py:108 > 2022-04-21 16:13:56
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.1901971101760864
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 45.2
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:54:03
+[INFO] train.py:121 > 2022-04-21 16:14:08
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 11
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:54:03
+[INFO] train.py:108 > 2022-04-21 16:14:08
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.128303725378854
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 54.50000000000001
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:54:15
+[INFO] train.py:121 > 2022-04-21 16:14:20
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 12
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:54:15
+[INFO] train.py:108 > 2022-04-21 16:14:20
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.082747552224568
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 55.05
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:54:26
+[INFO] train.py:121 > 2022-04-21 16:14:31
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 13
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:54:26
+[INFO] train.py:108 > 2022-04-21 16:14:31
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 1.047640348332269
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 60.35
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:54:38
+[INFO] train.py:121 > 2022-04-21 16:14:44
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 14
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:54:38
+[INFO] train.py:108 > 2022-04-21 16:14:44
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 0.9728239212717329
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 57.550000000000004
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:54:51
+[INFO] train.py:121 > 2022-04-21 16:14:56
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 15
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:54:51
+[INFO] train.py:108 > 2022-04-21 16:14:56
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 0.9618146777153015
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 57.599999999999994
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:55:03
+[INFO] train.py:121 > 2022-04-21 16:15:08
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 16
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:55:03
+[INFO] train.py:108 > 2022-04-21 16:15:08
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 0.9091338200228555
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 63.0
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:55:15
+[INFO] train.py:121 > 2022-04-21 16:15:21
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 17
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:55:15
+[INFO] train.py:108 > 2022-04-21 16:15:21
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 0.8922281495162419
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 62.64999999999999
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:55:26
+[INFO] train.py:121 > 2022-04-21 16:15:33
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 18
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:55:26
+[INFO] train.py:108 > 2022-04-21 16:15:33
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 0.8538206798689706
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 61.0
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:55:38
+[INFO] train.py:121 > 2022-04-21 16:15:45
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 19
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:55:38
+[INFO] train.py:108 > 2022-04-21 16:15:45
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:178 > Training ... 
 [INFO] train.py:190 > stage1 loss : 0.8219666625772204
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 61.7
 [INFO] train.py:120 > end stage1 in this epoch:
-[INFO] train.py:121 > 2022-04-21 15:55:49
+[INFO] train.py:121 > 2022-04-21 16:15:57
 [INFO] train.py:122 > start stage2 in this epoch:
-[INFO] train.py:123 > 2022-04-21 15:55:49
+[INFO] train.py:123 > 2022-04-21 16:15:57
 [INFO] train.py:137 > end stage2 in this epoch:
-[INFO] train.py:138 > 2022-04-21 15:55:49
+[INFO] train.py:138 > 2022-04-21 16:15:57
 [INFO] train.py:220 > test data number :  16
 [INFO] train.py:234 > Test Acc: 61.7
 [INFO] train.py:142 > test_accs:
@@ -241,6 +241,19 @@
 [INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
 [INFO] train.py:106 > Epoch 0
 [INFO] train.py:107 > start stage1 in this epoch:
-[INFO] train.py:108 > 2022-04-21 15:55:53
+[INFO] train.py:108 > 2022-04-21 16:16:00
 [INFO] train.py:111 > Current Learning Rate : 0.1
 [INFO] train.py:150 > Training ... 
+[INFO] train.py:155 > classification proportion 1-alpha =  0.33333333333333337
+[INFO] train.py:174 > stage1 distill loss :2.3702797825272017ce loss :6.446874824730125
+[INFO] train.py:220 > test data number :  47
+[INFO] train.py:234 > Test Acc: 43.666666666666664
+[INFO] train.py:120 > end stage1 in this epoch:
+[INFO] train.py:121 > 2022-04-21 16:16:17
+[INFO] train.py:105 > ------------------------------------------------------------------------------------------------------------------------------------------------------
+[INFO] train.py:106 > Epoch 1
+[INFO] train.py:107 > start stage1 in this epoch:
+[INFO] train.py:108 > 2022-04-21 16:16:17
+[INFO] train.py:111 > Current Learning Rate : 0.1
+[INFO] train.py:150 > Training ... 
+[INFO] train.py:155 > classification proportion 1-alpha =  0.33333333333333337
