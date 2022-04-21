@@ -152,7 +152,7 @@ class Trainer(Finetune):
         ce_losses = []
         T = 2
         alpha = (self.seen_cls - 20)/ self.seen_cls
-        logger.info("classification proportion 1-alpha = ", 1-alpha)
+        logger.info("classification proportion 1-alpha = "+" "+ str(1-alpha))
         for i, data in enumerate(tqdm(train_data)):
             image = data['image'].to(self.device)
             label = data['label'].to(self.device)
@@ -171,7 +171,7 @@ class Trainer(Finetune):
             optimizer.step()
             distill_losses.append(loss_soft_target.item())
             ce_losses.append(loss_hard_target.item())
-        logger.info("stage1 distill loss :"+ np.mean(distill_losses)+ "ce loss :"+str( np.mean(ce_losses)))
+        logger.info("stage1 distill loss :"+str( np.mean(distill_losses))+ "ce loss :"+str( np.mean(ce_losses)))
 
 
     def stage1(self, train_data, criterion, optimizer):
@@ -202,7 +202,7 @@ class Trainer(Finetune):
             loss.backward()
             optimizer.step()
             losses.append(loss.item())
-        logger.info("stage2 loss :"+" "+ np.mean(losses))
+        logger.info("stage2 loss :"+" "+ str(np.mean(losses)))
 
     def bias_forward(self, input):
         in1 = input[:, :20]
