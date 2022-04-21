@@ -1,9 +1,9 @@
-from MLwork.backbone.model import PreResNet, BiasLayer
-from MLwork.methods.examplar import Exemplar
-from MLwork.methods.finetune import Finetune
-from MLwork.utils.train_utils import select_model, select_optimizer
+from backbone.model import PreResNet, BiasLayer
+from methods.examplar import Exemplar
+from methods.finetune import Finetune
+from utils.train_utils import select_model, select_optimizer
 from sklearn.model_selection import train_test_split
-from MLwork.utils.data_loader import ImageDataset
+from utils.data_loader import ImageDataset
 import random
 from torch.utils.data import DataLoader
 import pandas as pd
@@ -11,7 +11,7 @@ import logging
 import torch.nn as nn
 import torch
 import torch.optim as optim
-from MLwork.methods.dataset import BatchData
+from methods.dataset import BatchData
 from torch.optim.lr_scheduler import LambdaLR, StepLR
 from copy import deepcopy
 import torch.nn.functional as F
@@ -73,6 +73,8 @@ class Trainer(Finetune):
 
     def before_task(self, datalist):
         logger.info("Apply before_task")
+        logger.info("asdasdasdas")
+
         incoming_classes = pd.DataFrame(datalist)["label"].unique().tolist()
         incoming_classes = list(set(incoming_classes))
         incoming_classes = 1 + max(incoming_classes)
@@ -100,13 +102,13 @@ class Trainer(Finetune):
         test_acc = []
         eval_dict = dict()
         for epoch in range(self.n_epoch):
-            print("---" * 50)
-            print("Epoch", epoch)
-            print("start stage1 in this epoch:")
-            print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            logger.info("---" * 50)
+            logger.info("Epoch"+" "+ str(epoch))
+            logger.info("start stage1 in this epoch:")
+            logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             scheduler.step()
             cur_lr = self.get_lr(optimizer)
-            print("Current Learning Rate : ", cur_lr)
+            logger.info("Current Learning Rate : "+str(cur_lr))
             self.model.train()
             for _ in range(len(self.bias_layers)):
                 self.bias_layers[_].eval()
@@ -115,10 +117,10 @@ class Trainer(Finetune):
             else:
                 self.stage1(train_data, self.criterion, optimizer)
             acc = self.test(test_data)
-            print("end stage1 in this epoch:")
-            print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        print("start stage2 in this epoch:")
-        print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            logger.info("end stage1 in this epoch:")
+            logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        logger.info("start stage2 in this epoch:")
+        logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         if inc_i > 0:
             for epoch in range(self.n_epoch):
                 # bias_scheduler.step()
@@ -132,8 +134,8 @@ class Trainer(Finetune):
         for i, layer in enumerate(self.bias_layers):
             layer.printParam(i)
         self.previous_model = deepcopy(self.model)
-        print("end stage2 in this epoch:")
-        print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        logger.info("end stage2 in this epoch:")
+        logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         acc = self.test(test_data)
         test_acc.append(acc)
         self.test_accs.append(max(test_acc))
@@ -145,12 +147,12 @@ class Trainer(Finetune):
 
     def stage1_distill(self, train_data, criterion, optimizer):
         # 蒸馏old data
-        print("Training ... ")
+        logger.info("Training ... ")
         distill_losses = []
         ce_losses = []
         T = 2
         alpha = (self.seen_cls - 20)/ self.seen_cls
-        print("classification proportion 1-alpha = ", 1-alpha)
+        logger.info("classification proportion 1-alpha = ", 1-alpha)
         for i, data in enumerate(tqdm(train_data)):
             image = data['image'].to(self.device)
             label = data['label'].to(self.device)
@@ -169,11 +171,11 @@ class Trainer(Finetune):
             optimizer.step()
             distill_losses.append(loss_soft_target.item())
             ce_losses.append(loss_hard_target.item())
-        print("stage1 distill loss :", np.mean(distill_losses), "ce loss :", np.mean(ce_losses))
+        logger.info("stage1 distill loss :"+ np.mean(distill_losses)+ "ce loss :"+ np.mean(ce_losses))
 
 
     def stage1(self, train_data, criterion, optimizer):
-        print("Training ... ")
+        logger.info("Training ... ")
         losses = []
         for i, data in enumerate(tqdm(train_data)):
             image= data['image'].to(self.device)
@@ -185,10 +187,10 @@ class Trainer(Finetune):
             loss.backward()
             optimizer.step()
             losses.append(loss.item())
-        print("stage1 loss :", np.mean(losses))
+        logger.info("stage1 loss :"+ " "+str(np.mean(losses)))
 
     def stage2(self, val_bias_data, criterion, optimizer):
-        print("Evaluating ... ")
+        logger.info("Evaluating ... ")
         losses = []
         for i, data in enumerate(tqdm(val_bias_data)):
             image = data['image'].to(self.device)
@@ -200,7 +202,7 @@ class Trainer(Finetune):
             loss.backward()
             optimizer.step()
             losses.append(loss.item())
-        print("stage2 loss :", np.mean(losses))
+        logger.info("stage2 loss :"+" "+ np.mean(losses))
 
     def bias_forward(self, input):
         in1 = input[:, :20]
@@ -215,7 +217,7 @@ class Trainer(Finetune):
         out5 = self.bias_layer5(in5)
         return torch.cat([out1, out2, out3, out4, out5], dim = 1)
     def test(self, testdata):
-        print("test data number : ",len(testdata))
+        logger.info("test data number : "+" "+ str(len(testdata)))
         self.model.eval()
         count = 0
         correct = 0
@@ -229,7 +231,7 @@ class Trainer(Finetune):
             correct += sum(pred == label).item()
             wrong += sum(pred != label).item()
         acc = correct / (wrong + correct)
-        print("Test Acc: {}".format(acc*100))
+        logger.info("Test Acc: {}".format(acc*100))
         self.model.train()
         print("---------------------------------------------")
         return acc
