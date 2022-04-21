@@ -1,12 +1,19 @@
 [INFO] main.py:90 > set train/test datalist for the current task!
-[INFO] train.py:75 > Apply before_task
-[INFO] train.py:79 > Increasing fc layer:  0  ---->  20
-[INFO] train.py:82 > ##########Start Training##########
-[INFO] train.py:83 > Incremental num : 0
-[INFO] train.py:140 > test_accs:
-[INFO] train.py:141 > [0.598]
+[INFO] train.py:77 > Apply before_task
+[INFO] train.py:81 > Increasing fc layer:  0  ---->  20
+[INFO] train.py:84 > ##########Start Training##########
+[INFO] train.py:85 > Incremental num : 0
+[INFO] train.py:143 > test_accs:
+[INFO] train.py:144 > [0.598]
 [INFO] main.py:90 > set train/test datalist for the current task!
-[INFO] train.py:75 > Apply before_task
-[INFO] train.py:79 > Increasing fc layer:  20  ---->  40
-[INFO] train.py:82 > ##########Start Training##########
-[INFO] train.py:83 > Incremental num : 1
+[INFO] train.py:77 > Apply before_task
+[INFO] train.py:81 > Increasing fc layer:  20  ---->  40
+[INFO] train.py:84 > ##########Start Training##########
+[INFO] train.py:85 > Incremental num : 1
+[INFO] train.py:143 > test_accs:
+[INFO] train.py:144 > [0.598, 0.476]
+[INFO] main.py:90 > set train/test datalist for the current task!
+[INFO] train.py:77 > Apply before_task
+[INFO] train.py:81 > Increasing fc layer:  40  ---->  60
+[INFO] train.py:84 > ##########Start Training##########
+[INFO] train.py:85 > Incremental num : 2

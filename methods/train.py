@@ -44,6 +44,8 @@ class Trainer(Finetune):
         self.test_accs = []
         self.exemplar = Exemplar(self.max_size, self.total_cls)
         self.test_s=[]
+        self.memory_val_list=[]
+        self.previous_model=None
         total_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
         print("Solver total trainable parameters : ", total_params)
 
@@ -93,9 +95,10 @@ class Trainer(Finetune):
         self.exemplar.update(self.total_cls // self.batch_num, (self.get_x_and_y(self.train_list)),
                              (self.get_x_and_y(self.val_list)))
         self.seen_cls = self.exemplar.get_cur_cls()
+        self.update_val_list()
         val_xs, val_ys = self.exemplar.get_exemplar_val()
         # val_bias_data= self.get_dataloader(self.batch_size, self.n_woker, self.get_list(val_xs,val_ys), None)[0]
-        val_bias_data= self.get_dataloader(self.batch_size, self.n_woker, self.memory_list, None)[0]
+        val_bias_data= self.get_dataloader(self.batch_size, self.n_woker, self.memory_val_list, None)[0]
         self.seen_cls =self.seen_cls+20;
         test_acc = []
         eval_dict = dict()
@@ -233,3 +236,67 @@ class Trainer(Finetune):
         self.model.train()
         print("---------------------------------------------")
         return acc
+
+    def after_task(self, cur_iter):
+        self.num_learned_class = self.num_learning_class
+        # update memory list if needed
+
+        # random sample
+
+        k = self.memory_size // self.num_learning_class  # memory_size==500, num_learning_classes==20
+        tmp = [[] for _ in range(self.num_learning_class)]
+        for _ in self.memory_list + self.train_list:
+            tmp[_['label']].append(_)
+        self.memory_list = []
+        for _ in tmp:
+            #    print(_)
+            self.memory_list.extend(_[:k])  # k==25
+
+    def update_val_list(self):
+        self.num_learned_class = self.num_learning_class
+        # update memory list if needed
+
+        # random sample
+
+        k = self.memory_size // self.num_learning_class  # memory_size==500, num_learning_classes==20
+        tmp = [[] for _ in range(self.num_learning_class)]
+        for _ in self.val_list + self.memory_val_list:
+            tmp[_['label']].append(_)
+        self.val_list = []
+        for _ in tmp:
+            #    print(_)
+            self.memory_val_list.extend(_[:k])  # k==25
+
+        # 对每一个类别保存前k项，随着总类别数的增加，每个类别保存的数目也在减少
+
+    def after_task(self, cur_iter):
+        self.num_learned_class = self.num_learning_class
+        # update memory list if needed
+
+        # random sample
+
+        k = self.memory_size // self.num_learning_class  # memory_size==500, num_learning_classes==20
+        tmp = [[] for _ in range(self.num_learning_class)]
+        for _ in self.memory_list + self.train_list:
+            tmp[_['label']].append(_)
+        self.memory_list = []
+        for _ in tmp:
+            #    print(_)
+            self.memory_list.extend(_[:k])  # k==25
+
+    def update_val_list(self):
+        self.num_learned_class = self.num_learning_class
+        # update memory list if needed
+
+        # random sample
+
+        k = self.memory_size // self.num_learning_class  # memory_size==500, num_learning_classes==20
+        tmp = [[] for _ in range(self.num_learning_class)]
+        for _ in self.val_list + self.memory_val_list:
+            tmp[_['label']].append(_)
+        self.val_list = []
+        for _ in tmp:
+            #    print(_)
+            self.memory_val_list.extend(_[:k])  # k==25
+
+        # 对每一个类别保存前k项，随着总类别数的增加，每个类别保存的数目也在减少
