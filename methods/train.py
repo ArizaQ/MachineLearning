@@ -45,7 +45,7 @@ class Trainer(Finetune):
         self.exemplar = Exemplar(self.max_size, self.total_cls)
         self.test_s=[]
         total_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
-        print("Solver total trainable parameters : ", total_params)
+        logger.info("Solver total trainable parameters : ", total_params)
 
     def get_train_and_val(self,cur_train_datalist):
         return cur_train_datalist[0:9000], cur_train_datalist[9000:10000]
@@ -233,5 +233,5 @@ class Trainer(Finetune):
         acc = correct / (wrong + correct)
         logger.info("Test Acc: {}".format(acc*100))
         self.model.train()
-        print("---------------------------------------------")
+        logger.info("---------------------------------------------")
         return acc
