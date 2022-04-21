@@ -15,7 +15,7 @@ def base_parser():
     parser.add_argument(
         "--dir",
         type=str,
-        default=".\\"
+        default="."
     )
     
     parser.add_argument(

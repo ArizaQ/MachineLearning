@@ -2,9 +2,9 @@
 import torch.optim.optimizer as torch_optimizer
 from easydict import EasyDict as edict
 from torch import optim
-from MLwork.backbone.model import PreResNet
+from backbone.model import PreResNet
 
-from MLwork.backbone import resnet18
+from backbone import resnet18
 
 
 def select_optimizer(opt_name, lr, model, sched_name="cos"):

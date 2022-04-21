@@ -7,10 +7,10 @@ import torch
 import torch.nn as nn
 from torchvision import transforms
 
-from MLwork.methods.examplar import Exemplar
-from MLwork.methods.train import Trainer
+from methods.examplar import Exemplar
+from methods.train import Trainer
 from configuration import config
-from MLwork.utils.data_loader import get_statistics
+from utils.data_loader import get_statistics
 from methods.finetune import Finetune
 from collections import defaultdict
 from dataset import get_datalist, get_classlist

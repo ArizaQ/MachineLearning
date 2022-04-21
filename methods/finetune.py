@@ -1,5 +1,5 @@
-from MLwork.utils.train_utils import select_model, select_optimizer
-from MLwork.utils.data_loader import ImageDataset
+from utils.train_utils import select_model, select_optimizer
+from utils.data_loader import ImageDataset
 import random
 from torch.utils.data import DataLoader
 import pandas as pd
