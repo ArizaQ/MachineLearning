@@ -47,7 +47,7 @@ class Trainer(Finetune):
         self.memory_val_list=[]
         self.previous_model=None
         total_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
-        print("Solver total trainable parameters : ", total_params)
+        logger.info("Solver total trainable parameters : ", total_params)
 
     def get_train_and_val(self,cur_train_datalist):
         return cur_train_datalist[0:9000], cur_train_datalist[9000:10000]
@@ -103,13 +103,13 @@ class Trainer(Finetune):
         test_acc = []
         eval_dict = dict()
         for epoch in range(self.n_epoch):
-            print("---" * 50)
-            print("Epoch", epoch)
-            print("start stage1 in this epoch:")
-            print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            logger.info("---" * 50)
+            logger.info("Epoch" + " " + str(epoch))
+            logger.info("start stage1 in this epoch:")
+            logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             scheduler.step()
             cur_lr = self.get_lr(optimizer)
-            print("Current Learning Rate : ", cur_lr)
+            logger.info("Current Learning Rate : " + str(cur_lr))
             self.model.train()
             for _ in range(len(self.bias_layers)):
                 self.bias_layers[_].eval()
@@ -118,10 +118,10 @@ class Trainer(Finetune):
             else:
                 self.stage1(train_data, self.criterion, optimizer)
             acc = self.test(test_data)
-            print("end stage1 in this epoch:")
-            print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        print("start stage2 in this epoch:")
-        print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            logger.info("end stage1 in this epoch:")
+            logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        logger.info("start stage2 in this epoch:")
+        logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         if inc_i > 0:
             for epoch in range(self.n_epoch):
                 # bias_scheduler.step()
@@ -135,8 +135,8 @@ class Trainer(Finetune):
         for i, layer in enumerate(self.bias_layers):
             layer.printParam(i)
         self.previous_model = deepcopy(self.model)
-        print("end stage2 in this epoch:")
-        print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        logger.info("end stage2 in this epoch:")
+        logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         acc = self.test(test_data)
         test_acc.append(acc)
         self.test_accs.append(max(test_acc))
@@ -144,16 +144,17 @@ class Trainer(Finetune):
         logger.info(self.test_accs)
 
         eval_dict = self.evaluation(test_loader=test_data, criterion=self.criterion)
+        logger.info(eval_dict)
         return test_acc,eval_dict
 
     def stage1_distill(self, train_data, criterion, optimizer):
         # 蒸馏old data
-        print("Training ... ")
+        logger.info("Training ... ")
         distill_losses = []
         ce_losses = []
         T = 2
         alpha = (self.seen_cls - 20)/ self.seen_cls
-        print("classification proportion 1-alpha = ", 1-alpha)
+        logger.info("classification proportion 1-alpha = "+" "+ str(1-alpha))
         for i, data in enumerate(tqdm(train_data)):
             image = data['image'].to(self.device)
             label = data['label'].to(self.device)
@@ -172,11 +173,11 @@ class Trainer(Finetune):
             optimizer.step()
             distill_losses.append(loss_soft_target.item())
             ce_losses.append(loss_hard_target.item())
-        print("stage1 distill loss :", np.mean(distill_losses), "ce loss :", np.mean(ce_losses))
+        logger.info("stage1 distill loss :"+str( np.mean(distill_losses))+ "ce loss :"+str( np.mean(ce_losses)))
 
 
     def stage1(self, train_data, criterion, optimizer):
-        print("Training ... ")
+        logger.info("Training ... ")
         losses = []
         for i, data in enumerate(tqdm(train_data)):
             image= data['image'].to(self.device)
@@ -188,10 +189,10 @@ class Trainer(Finetune):
             loss.backward()
             optimizer.step()
             losses.append(loss.item())
-        print("stage1 loss :", np.mean(losses))
+        logger.info("stage1 loss :"+ " "+str(np.mean(losses)))
 
     def stage2(self, val_bias_data, criterion, optimizer):
-        print("Evaluating ... ")
+        logger.info("Evaluating ... ")
         losses = []
         for i, data in enumerate(tqdm(val_bias_data)):
             image = data['image'].to(self.device)
@@ -203,7 +204,7 @@ class Trainer(Finetune):
             loss.backward()
             optimizer.step()
             losses.append(loss.item())
-        print("stage2 loss :", np.mean(losses))
+        logger.info("stage2 loss :"+" "+ str(np.mean(losses)))
 
     def bias_forward(self, input):
         in1 = input[:, :20]
@@ -217,8 +218,9 @@ class Trainer(Finetune):
         out4 = self.bias_layer4(in4)
         out5 = self.bias_layer5(in5)
         return torch.cat([out1, out2, out3, out4, out5], dim = 1)
+
     def test(self, testdata):
-        print("test data number : ",len(testdata))
+        logger.info("test data number : " + " " + str(len(testdata)))
         self.model.eval()
         count = 0
         correct = 0
@@ -228,29 +230,14 @@ class Trainer(Finetune):
             label = data['label'].to(self.device)
             p = self.model(image)
             p = self.bias_forward(p)
-            pred = p[:,:self.seen_cls].argmax(dim=-1)
+            pred = p[:, :self.seen_cls].argmax(dim=-1)
             correct += sum(pred == label).item()
             wrong += sum(pred != label).item()
         acc = correct / (wrong + correct)
-        print("Test Acc: {}".format(acc*100))
+        logger.info("Test Acc: {}".format(acc * 100))
         self.model.train()
-        print("---------------------------------------------")
+        logger.info("---------------------------------------------")
         return acc
-
-    def after_task(self, cur_iter):
-        self.num_learned_class = self.num_learning_class
-        # update memory list if needed
-
-        # random sample
-
-        k = self.memory_size // self.num_learning_class  # memory_size==500, num_learning_classes==20
-        tmp = [[] for _ in range(self.num_learning_class)]
-        for _ in self.memory_list + self.train_list:
-            tmp[_['label']].append(_)
-        self.memory_list = []
-        for _ in tmp:
-            #    print(_)
-            self.memory_list.extend(_[:k])  # k==25
 
     def update_val_list(self):
         self.num_learned_class = self.num_learning_class
