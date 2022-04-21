@@ -19,7 +19,7 @@ def base_parser():
     )
     
     parser.add_argument(
-        "--memory_size", type=int, default=500, help="Episodic memory size"
+        "--memory_size", type=int, default=2000, help="Episodic memory size"
     )
 
     

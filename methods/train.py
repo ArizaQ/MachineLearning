@@ -245,7 +245,7 @@ class Trainer(Finetune):
 
         # random sample
 
-        k = self.memory_size // self.num_learning_class  # memory_size==500, num_learning_classes==20
+        k = (self.memory_size*0.1) // self.num_learning_class  # memory_size==500, num_learning_classes==20
         tmp = [[] for _ in range(self.num_learning_class)]
         for _ in self.val_list + self.memory_val_list:
             tmp[_['label']].append(_)
@@ -270,20 +270,3 @@ class Trainer(Finetune):
         for _ in tmp:
             #    print(_)
             self.memory_list.extend(_[:k])  # k==25
-
-    def update_val_list(self):
-        self.num_learned_class = self.num_learning_class
-        # update memory list if needed
-
-        # random sample
-
-        k = self.memory_size // self.num_learning_class  # memory_size==500, num_learning_classes==20
-        tmp = [[] for _ in range(self.num_learning_class)]
-        for _ in self.val_list + self.memory_val_list:
-            tmp[_['label']].append(_)
-        self.val_list = []
-        for _ in tmp:
-            #    print(_)
-            self.memory_val_list.extend(_[:k])  # k==25
-
-        # 对每一个类别保存前k项，随着总类别数的增加，每个类别保存的数目也在减少
