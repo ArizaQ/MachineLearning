@@ -7,7 +7,6 @@ import torch
 import torch.nn as nn
 from torchvision import transforms
 
-from MLwork.methods.examplar import Exemplar
 from MLwork.methods.train import Trainer
 from configuration import config
 from MLwork.utils.data_loader import get_statistics
@@ -65,7 +64,7 @@ def main():
     )
 
     criterion = nn.CrossEntropyLoss(reduction="mean")
-    exemplar = Exemplar(args.max_size, 2)
+    # exemplar = Exemplar(args.max_size, 2)
 
     # generate class order
     # split classes to args.n_task  tasks
@@ -77,7 +76,7 @@ def main():
     kwargs = vars(args)
 
     # create a instance of your method
-    method = Trainer(exemplar,criterion, device, train_transform, test_transform, class_of_task[0], n_classes, **kwargs)
+    method = Trainer(criterion, device, train_transform, test_transform, class_of_task[0], n_classes, **kwargs)
     # method=Finetune(criterion, device, train_transform, test_transform, class_of_task[0], n_classes, **kwargs)
     task_records = defaultdict(list)
     batch_num=args.batch_num

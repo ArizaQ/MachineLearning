@@ -15,7 +15,7 @@ def base_parser():
     parser.add_argument(
         "--dir",
         type=str,
-        default=".\\"
+        default="./"
     )
     
     parser.add_argument(
@@ -33,7 +33,7 @@ def base_parser():
     parser.add_argument("--opt_name", type=str, default="sgd", help="[adam, sgd]")
     parser.add_argument("--sched_name", type=str, default="cos", help="[cos, anneal]")
     parser.add_argument("--batch_size", type=int, default=128, help="batch size")
-    parser.add_argument("--n_epoch", type=int, default=20, help="Epoch")
+    parser.add_argument("--n_epoch", type=int, default=250, help="Epoch")
 
     parser.add_argument("--n_worker", type=int, default=0, help="The number of workers")
 
@@ -60,6 +60,7 @@ def base_parser():
     parser.add_argument('--total_cls', default=100, type=int)
 
     parser.add_argument('--batch_num', default=5, type=int)
+    parser.add_argument('--model_base_path', type=str, default="logs/CIFAR100/modelv2")
 
 
     args = parser.parse_args()

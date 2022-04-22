@@ -1,17 +1,12 @@
 from MLwork.backbone.model import PreResNet, BiasLayer
-from MLwork.methods.examplar import Exemplar
 from MLwork.methods.finetune import Finetune
-from MLwork.utils.train_utils import select_model, select_optimizer
-from sklearn.model_selection import train_test_split
-from MLwork.utils.data_loader import ImageDataset
+
 import random
-from torch.utils.data import DataLoader
 import pandas as pd
 import logging
 import torch.nn as nn
 import torch
 import torch.optim as optim
-from MLwork.methods.dataset import BatchData
 from torch.optim.lr_scheduler import LambdaLR, StepLR
 from copy import deepcopy
 import torch.nn.functional as F
@@ -21,9 +16,8 @@ import datetime
 logger = logging.getLogger()
 
 
-
 class Trainer(Finetune):
-    def __init__(self,exempler, criterion, device, train_transform, test_transform, init_class, n_classes, **kwargs):
+    def __init__(self, criterion, device, train_transform, test_transform, init_class, n_classes, **kwargs):
         super().__init__( criterion, device, train_transform, test_transform, init_class, n_classes, **kwargs)
         self.total_cls = kwargs['total_cls']
         self.seen_cls = 0
@@ -40,14 +34,17 @@ class Trainer(Finetune):
         self.lr=kwargs["lr"]
         self.max_size=kwargs["max_size"]
         self.batch_num=kwargs["batch_num"]
+        self.cls_num_per_inc=kwargs["total_cls"]//kwargs["batch_num"]
         self.criterion = nn.CrossEntropyLoss()
         self.test_accs = []
-        self.exemplar = Exemplar(self.max_size, self.total_cls)
+        # self.exemplar = Exemplar(self.max_size, self.total_cls)
         self.test_s=[]
         self.memory_val_list=[]
         self.previous_model=None
+        self.model_base_path = kwargs["model_base_path"]
         total_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
-        logger.info("Solver total trainable parameters : ", total_params)
+        logger.info("Solver total trainable parameters : ")
+        logger.info(total_params)
 
     def get_train_and_val(self,cur_train_datalist):
         return cur_train_datalist[0:9000], cur_train_datalist[9000:10000]
@@ -55,6 +52,8 @@ class Trainer(Finetune):
         random.shuffle(train_datalist)
         self.train_list, self.val_list= self.get_train_and_val(train_datalist)
         self.test_list = test_datalist
+
+    # the two methods are useless
     def get_x_and_y(self,datalist):
         x_list=[]
         y_list=[]
@@ -62,7 +61,6 @@ class Trainer(Finetune):
             x_list.append(item["file_name"])
             y_list.append(item["label"])
         return x_list,y_list
-
     def get_list(self,val_x,val_y):
         val_list=[]
         for i in range(len(val_x)):
@@ -84,6 +82,7 @@ class Trainer(Finetune):
         logger.info("#" * 10 + "Start Training" + "#" * 10)
         logger.info(f"Incremental num : {inc_i}")
         train_list = self.train_list + self.memory_list
+        # train_list=self.get_list(self.exemplar.get_exemplar_train())+self.train_list
         self.test_s.extend(self.test_list)
         train_data, test_data = self.get_dataloader(
             self.batch_size, self.n_woker, train_list, self.test_s
@@ -92,14 +91,14 @@ class Trainer(Finetune):
         optimizer = optim.SGD(self.model.parameters(), lr=self.lr, momentum=0.9, weight_decay=2e-4)
         scheduler = StepLR(optimizer, step_size=70, gamma=0.1)
         bias_optimizer = optim.Adam(self.bias_layers[inc_i].parameters(), lr=0.001)
-        self.exemplar.update(self.total_cls // self.batch_num, (self.get_x_and_y(self.train_list)),
-                             (self.get_x_and_y(self.val_list)))
-        self.seen_cls = self.exemplar.get_cur_cls()
-        self.update_val_list()
-        val_xs, val_ys = self.exemplar.get_exemplar_val()
+        # self.exemplar.update(self.total_cls // self.batch_num, (self.get_x_and_y(self.train_list)),
+        #                      (self.get_x_and_y(self.val_list)))
+        # self.seen_cls = self.exemplar.get_cur_cls()
+        self.update_val_list()# update validation set
+        # val_xs, val_ys = self.exemplar.get_exemplar_val()
         # val_bias_data= self.get_dataloader(self.batch_size, self.n_woker, self.get_list(val_xs,val_ys), None)[0]
         val_bias_data= self.get_dataloader(self.batch_size, self.n_woker, self.memory_val_list, None)[0]
-        self.seen_cls =self.seen_cls+20;
+        self.seen_cls =self.seen_cls+self.cls_num_per_inc
         test_acc = []
         eval_dict = dict()
         for epoch in range(self.n_epoch):
@@ -133,7 +132,7 @@ class Trainer(Finetune):
                     acc = self.test(test_data)
                     test_acc.append(acc)
         for i, layer in enumerate(self.bias_layers):
-            layer.printParam(i)
+            layer.printParam(logger,i)
         self.previous_model = deepcopy(self.model)
         logger.info("end stage2 in this epoch:")
         logger.info(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
@@ -245,7 +244,7 @@ class Trainer(Finetune):
 
         # random sample
 
-        k = (self.memory_size*0.1) // self.num_learning_class  # memory_size==500, num_learning_classes==20
+        k = int((self.memory_size*0.1)) // self.num_learning_class  # memory_size==500, num_learning_classes==20
         tmp = [[] for _ in range(self.num_learning_class)]
         for _ in self.val_list + self.memory_val_list:
             tmp[_['label']].append(_)
@@ -270,3 +269,4 @@ class Trainer(Finetune):
         for _ in tmp:
             #    print(_)
             self.memory_list.extend(_[:k])  # k==25
+        torch.save(self.model, self.model_base_path+str(cur_iter)+".pth")

@@ -170,5 +170,6 @@ class BiasLayer(nn.Module):
         self.beta = nn.Parameter(torch.zeros(1, requires_grad=True, device="cuda"))
     def forward(self, x):
         return self.alpha * x + self.beta
-    def printParam(self, i):
+    def printParam(self,logger, i):
+        logger.info(str(i)+" "+str(self.alpha.item())+" "+str(self.beta.item()))
         print(i, self.alpha.item(), self.beta.item())
